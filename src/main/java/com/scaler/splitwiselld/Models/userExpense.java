@@ -11,15 +11,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Expense extends BaseModel {
+public class userExpense extends BaseModel{
 
-    private String description;
-    private Double amount;
     @ManyToOne
-    private User expensedCreatedBy;
+    private User user;
+    @ManyToOne
+    private Expense expense;
     @Enumerated(EnumType.ORDINAL)
-    private ExpenseType expenseType;
-    @ManyToOne
-    private Group groups;
+    private UserExpenseType  userExpenseType;
 
+    private int Amount;
 }
