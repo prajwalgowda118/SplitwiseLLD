@@ -21,7 +21,6 @@ public class UserController {
 
         User user;
         UserRegisterResponseDTO responseDTO = new UserRegisterResponseDTO();
-
         try
         {
                user = userService.registerUser(
@@ -29,7 +28,6 @@ public class UserController {
                                  userRegisterRequestDTo.getPassword(),
                                        userRegisterRequestDTo.getPhoneNumber()
                );
-
             responseDTO.setUserId(user.getId());
             responseDTO.setStatus("Success");
             responseDTO.setMessage("User has been registered successfully");

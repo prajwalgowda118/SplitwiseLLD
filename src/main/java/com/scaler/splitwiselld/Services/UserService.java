@@ -38,6 +38,12 @@ public class UserService {
         }
         //return user;
 
+        User RegisterUser = new User();
+        RegisterUser.setUsername(username);
+        RegisterUser.setPassword(password);
+        RegisterUser.setPhoneNumber(phoneNumber);
+        RegisterUser.setUserStatus(UserStatus.ACTIVE);
+        return userRepository.save(RegisterUser);
 
     }
 }
