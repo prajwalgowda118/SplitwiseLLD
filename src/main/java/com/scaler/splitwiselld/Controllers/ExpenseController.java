@@ -2,6 +2,8 @@ package com.scaler.splitwiselld.Controllers;
 
 import com.scaler.splitwiselld.Services.ExpenseService;
 import com.scaler.splitwiselld.Strategies.Transaction;
+import com.scaler.splitwiselld.dtos.SettleUpGroupRequestDto;
+import com.scaler.splitwiselld.dtos.SettleUpGroupResponseDto;
 import com.scaler.splitwiselld.dtos.SettleUpResponseDto;
 import com.scaler.splitwiselld.dtos.SettleUpUserRequestDto;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,6 @@ public class ExpenseController {
 
         this.expenseService = expenseService;
     }
-
 
     public SettleUpResponseDto SettleUpUser(SettleUpUserRequestDto settleUpUserRequestDto)
     {
@@ -45,6 +46,22 @@ public class ExpenseController {
         }
 
         //return new ArrayList<>();
+
+
+    }
+    public SettleUpGroupResponseDto SettleUpGroup(SettleUpGroupRequestDto settleUpGroupRequestDto){
+
+        long groupID= settleUpGroupRequestDto.getGroupId();
+
+        List<Transaction> transactions = expenseService.SettleUpGroup(groupID);
+
+        SettleUpGroupResponseDto settleUpGroupResponseDto=new SettleUpGroupResponseDto();
+
+        settleUpGroupResponseDto.setMessage("Successfully settled group");
+        settleUpGroupResponseDto.setStatus("Success");
+        settleUpGroupResponseDto.setTransactionList(transactions);
+
+        return settleUpGroupResponseDto;
 
     }
 }
