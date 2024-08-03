@@ -2,6 +2,7 @@ package com.scaler.splitwiselld.Services;
 
 
 import com.scaler.splitwiselld.Exception.UserAlreadyFoundException;
+import com.scaler.splitwiselld.Exception.UserNotFoundException;
 import com.scaler.splitwiselld.Models.User;
 import com.scaler.splitwiselld.Models.UserStatus;
 import com.scaler.splitwiselld.Repository.UserRepository;
@@ -44,6 +45,21 @@ public class UserService {
         RegisterUser.setPhoneNumber(phoneNumber);
         RegisterUser.setUserStatus(UserStatus.ACTIVE);
         return userRepository.save(RegisterUser);
+
+    }
+
+    public User updateUser(long userId,String password) throws UserNotFoundException {
+
+        Optional<User> user = userRepository.findById(userId);
+        if(!user.isPresent()){
+            throw new UserNotFoundException("User not found for update");
+        }
+        else{
+            User updateUser = user.get();
+            updateUser.setPassword(password);
+            return userRepository.save(updateUser);
+
+        }
 
     }
 }

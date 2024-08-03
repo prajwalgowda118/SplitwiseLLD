@@ -4,6 +4,8 @@ import com.scaler.splitwiselld.Exception.UserAlreadyFoundException;
 import com.scaler.splitwiselld.Exception.UserNotFoundException;
 import com.scaler.splitwiselld.Models.User;
 import com.scaler.splitwiselld.Services.UserService;
+import com.scaler.splitwiselld.dtos.UpdateProfileRequestDto;
+import com.scaler.splitwiselld.dtos.UpdateProfileResponseDto;
 import com.scaler.splitwiselld.dtos.UserRegisterRequestDTo;
 import com.scaler.splitwiselld.dtos.UserRegisterResponseDTO;
 import org.springframework.stereotype.Controller;
@@ -41,4 +43,25 @@ public class UserController {
 
 
     }
+
+    public UpdateProfileResponseDto updateUser(UpdateProfileRequestDto updateProfileRequestDto) {
+
+        User user;
+        UpdateProfileResponseDto responseDTO = new UpdateProfileResponseDto();
+
+        try {
+            user = userService.updateUser(updateProfileRequestDto.getUserID(),
+                    updateProfileRequestDto.getPassword()
+            );
+            responseDTO.setUser(user);
+            return responseDTO;
+
+        }catch(UserNotFoundException e) {
+
+            responseDTO.setStatus("Failuree");
+            responseDTO.setMessage(e.getMessage());
+            return responseDTO;
+        }
+    }
+
 }

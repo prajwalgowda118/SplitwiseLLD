@@ -1,6 +1,8 @@
 package com.scaler.splitwiselld.Commands;
 
 import com.scaler.splitwiselld.Controllers.UserController;
+import com.scaler.splitwiselld.dtos.UserRegisterRequestDTo;
+import com.scaler.splitwiselld.dtos.UserRegisterResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,7 +40,15 @@ public class RegisterUserCommand implements Command {
         String phoneNumber = inpWords.get(2);
         String username = inpWords.get(3);
 
+        UserRegisterRequestDTo userRegisterRequestDTo = new UserRegisterRequestDTo();
+        userRegisterRequestDTo.setUsername(username);
+        userRegisterRequestDTo.setPassword(password);
+        userRegisterRequestDTo.setPhoneNumber(phoneNumber);
 
+        UserRegisterResponseDTO userRegisterResponseDTO=userController.registerUser(userRegisterRequestDTo);
+
+        System.out.println("User registered successfully");
+        System.out.println(userRegisterResponseDTO.toString());
 
 
     }
