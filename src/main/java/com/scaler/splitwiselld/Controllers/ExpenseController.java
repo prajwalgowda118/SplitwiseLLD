@@ -27,7 +27,13 @@ public class ExpenseController {
 
         long userID = settleUpUserRequestDto.getUserID();
 
-        List<Transaction> transactions = expenseService.SettleUpUser(userID);
+        try{
+            List<Transaction> transactions = expenseService.SettleUpUser(userID);
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+
 
 
 
